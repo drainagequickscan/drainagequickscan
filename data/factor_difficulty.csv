@@ -1,0 +1,13 @@
+code post,omschrijving,normaal,makkelijk,moeilijk
+NTD011,nader te detailleren,0.1,0.05,0.15
+IK016,Eenmalige en bouwplaatskosten,0.03,0.01,0.05
+IK019,Uitvoeringskosten,0.07,0.05,0.1
+IK0110,Algemene kosten,0.08,0.08,0.08
+IK0111,Winst,0.03,0.03,0.03
+IK0112,Risico,0.02,0.02,0.02
+RBK013,Niet benoemd objectrisico bouwkosten,0.25,0.15,0.3
+EK012,Engineeringskosten adviesbureau(s),0.1,0.1,0.15
+EK013,Engineeringskosten opdrachtgever (overheid/instantie/bedrijf),0.05,0.05,0.05
+EK0118,Niet benoemd objectrisico engineeringskosten,0.25,0.15,0.3
+OK011,Overige bijkomende kosten,0.05,0.05,0.05
+OK0137,Niet benoemd objectrisico overige bijkomende kosten,0.25,0.15,0.3

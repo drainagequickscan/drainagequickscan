@@ -1,0 +1,155 @@
+code post,omschrijving post,freq.,type,vanaf,t/m,looptijd,check,hoeveelheid,eenheid,prijs,factor,aantal,lengte,hoogte,breedte,opp,totaal
+200210,Installeren filter ø200mm lg 5m met 100mm grind omhulling,,,5,9,5,,0,m,185,,,,,,,0
+200220,Casing bovenste 3 meter van het filter,,,5,9,5,,0,st,350,,,,,,,0
+200230,Leveren en aanbrengen bronkop en aansluiten op verzamelleiding,,,5,9,5,,0,st,400,,,,,,,0
+200240,Aanbrengen gietijzeren putrand met deksel,,,5,9,5,,0,st,285,,,,,,,0
+200250,Horizontaal (theoretische lengte) gestuurd filter met grindomhulling tot ø450mm,,,5,9,5,,1000,m,550,,,1000.0,,,,550000
+200260,Horizorale drain ø165mm met grindomhulling tot ø450mm,,,5,9,5,,0,m,33,,,,,,,0
+200270,Grond ontgraven t.b.v. grindkoffer,,,5,9,5,,0,m³,1.25,,,,,,,0
+200280,Sleufbemaling,,,5,9,5,,0,m,30,,,,,,,0
+200290,Afvoeren overtollige grond,,,5,9,5,,0,m³,1.75,,,,,,,0
+200300,Leveren en aanbrengen geotextiel,,,5,9,5,,0,m²,3,,,,,,,0
+200310,Leveren en aanbrengen grind,,,5,9,5,,0,m³,27.5,,,,,,,0
+200330,0,,,5,9,5,,0,0,0,,,,,,,0
+30,Verzamelsysteem,,,,,,,,,,,,,,,,
+300210,Aanbrengen verzamelleiding pvc ø315mm,,,5,9,5,,0,m,35,,,,,,,0
+300220,Aanbrengen inspectieput 1000x1000x1000mm,,,5,9,5,,2,st,825,0.002,,1000.0,,,,1650
+300230,Aanbrengen gietijzeren putrand met deksel,,,5,9,5,,2,st,285,,2.0,,,,,570
+300240,Aanbrengen automatisch regelbare overlaat op basis van het waterniveau in de put,,,5,9,5,,2,st,2000,,2.0,,,,,4000
+300250,0,,,5,9,5,,0,0,0,,,,,,,0
+300260,0,,,5,9,5,,0,0,0,,,,,,,0
+300270,0,,,5,9,5,,0,0,0,,,,,,,0
+300280,0,,,5,9,5,,0,0,0,,,,,,,0
+40,Afvoer richting watergang,,,,,,,,,,,,,,,,
+400210,Aanbrengen afvoerleiding lang 50m beton ø500mm,,,5,9,5,,100,m,75,,2.0,50.0,,,,7500
+400220,Aanbrengen afvoerleiding lang 50m pvc ø315mm,,,5,9,5,,0,m,35,,,,,,,0
+400230,Aanbrengen uitstroombak en betonverdediging in watergang,,,5,9,5,,2,st,1700,,2.0,,,,,3400
+400240,Aanbrengen regelbare klepstuw in damwand scherm,,,5,9,5,,0,st,7000,,,,,,,0
+400250,0,,,5,9,5,,0,0,0,,,,,,,0
+400260,0,,,5,9,5,,0,0,0,,,,,,,0
+400270,0,,,5,9,5,,0,0,0,,,,,,,0
+400280,0,,,5,9,5,,0,0,0,,,,,,,0
+400290,0,,,5,9,5,,0,0,0,,,,,,,0
+50,Besturing en monitoring,,,,,,,,,,,,,,,,
+500210,Automatische aandrijving afsluiters/overlaat,,,,,,,2,st,1500,,2.0,,,,,3000
+500220,Automatische aandrijving stuw,,,5,9,5,,0,st,2500,,,,,,,0
+500230,Besturingskast incl. inrichting en webconnector,,,5,9,5,,2,st,10000,,2.0,,,,,20000
+500240,Voedingskabel naar schakelkasten,,,5,9,5,,1000,m,27,,,1000.0,,,,27000
+500250,Datakabel naar schakelkasten,,,5,9,5,,0,m,23,,,,,,,0
+500260,Plaatsen peilbuis,,,5,9,5,,2,st,250,0.002,,1000.0,,,,500
+500270,Automatische waarneming waterpeil peilbuis (sensor en modem),,,5,9,5,,2,st,2000,,2.0,,,,,4000
+500280,Automatische waarneming waterpeil stuw / verzamelput (sensor en modem),,,5,9,5,,0,st,2000,,,,,,,0
+500290,Uitvoeren onttrekkingstest per bron (6 tot 10 per dag),,,5,9,5,,0,dag,900,,,,,,,0
+500300,0,,,5,9,5,,0,0,0,,,,,,,0
+60,Herstel,,,,,,,,,,,,,,,,
+600210,Afwerken terrein en inzaaien,,,5,9,5,,6000,m²,1.5,,,1200.0,,5.0,,9000
+600220,Afwerken grasland en inzaaien,,,5,9,5,,0,m²,1,,,,,,,0
+600230,0,,,5,9,5,,0,0,0,,,,,,,0
+600240,0,,,5,9,5,,0,0,0,,,,,,,0
+600250,0,,,5,9,5,,0,0,0,,,,,,,0
+600260,0,,,5,9,5,,0,0,0,,,,,,,0
+600270,0,,,5,9,5,,0,0,0,,,,,,,0
+600280,0,,,5,9,5,,0,0,0,,,,,,,0
+70,Diversen,,,,,,,,,,,,,,,,
+700210,Rijplatenbaan,,,5,9,5,,0,m,20,,,,,,,0
+700220,Bodemmonsters incl. analyse,,,5,9,5,,0,st,0,,,,,,,0
+200320,Reinigen leidingen en putten,,,5,9,5,,1100,m,2.5,,,1100.0,,,,2750
+700230,0,,,5,9,5,,0,0,0,,,,,,,0
+700240,0,,,5,9,5,,0,0,0,,,,,,,0
+700250,0,,,5,9,5,,0,0,0,,,,,,,0
+700260,0,,,5,9,5,,0,0,0,,,,,,,0
+700270,0,,,5,9,5,,0,0,0,,,,,,,0
+700280,0,,,5,9,5,,0,0,0,,,,,,,0
+80,Hoofdstuk 7,,,,,,,,,,,,,,,,
+800210,0,,,,,,,0,0,0,,,,,,,0
+800220,0,,,5,9,5,,0,0,0,,,,,,,0
+800220,0,,,5,9,5,,0,0,0,,,,,,,0
+800220,0,,,5,9,5,,0,0,0,,,,,,,0
+800220,0,,,5,9,5,,0,0,0,,,,,,,0
+800220,0,,,5,9,5,,0,0,0,,,,,,,0
+800220,0,,,5,9,5,,0,0,0,,,,,,,0
+800220,0,,,5,9,5,,0,0,0,,,,,,,0
+BKbdk,Benoemde directe bouwkosten,,,,,,,,,,,,,,,,633370
+NTD021,Nader te detailleren bouwkosten,,,,,,,0.1,,633370,,,,,,,63337
+BKdk,Directe bouwkosten,,,,,,,,,,,,,,,,696707
+IK021,Eenmalige kosten,,,,,,,0,EUR,0,,,,,,,0
+IK022,Algemene bouwplaatskosten,,,,,,,0,wk,0,,,,,,,0
+IK023,Uitvoeringskosten,,,,,,,0,wk,0,,,,,,,0
+IK024,Algemene kosten,,,,,,,0,EUR,0,,,,,,,0
+IK025,Winst en/of risico,,,,,,,0,EUR,0,,,,,,,0
+IK026,Eenmalige en bouwplaatskosten,,,,,,,0.03,,696707,,,,,,,20901.21
+IK027,Algemene bouwplaatskosten,,,,,,,0,,696707,,,,,,,0
+IK028,Coördinatiekosten / koepelkosten,,,,,,,0,,696707,,,,,,,0
+IK029,Uitvoeringskosten,,,,,,,0.07,,696707,,,,,,,48769.490000000005
+IK0210,Algemene kosten,,,,,,,0.08,,766377.7,,,,,,,61310.216
+IK0211,Winst,,,,,,,0.03,,827687.916,,,,,,,24830.637479999998
+IK0212,Risico,,,,,,,0.02,,827687.916,,,,,,,16553.75832
+IK0213,Post,,,,,,,0,ehd,0,,,,,,,0
+IK0214,Post,,,,,,,0,ehd,0,,,,,,,0
+BKik,Indirecte bouwkosten,,,,,,,0.24739999999999998,,,,,,,,,172365.3118
+VZBK,Voorziene bouwkosten ,,,,,,,,,,,,,,,,869072.3118
+RBK021,Benoemd objectrisico bouwkosten,,,,,,,0,k*g,0,,,,,,,0
+RBK022,Benoemd objectrisico bouwkosten,,,,,,,0,k*g,0,,,,,,,0
+RBK023,Niet benoemd objectrisico bouwkosten,,,,,,,0.25,,869072.3118,,,,,,,217268.07795
+RBK,Risico's bouwkosten,,,,,,,0.25,,,,,,,,,217268.07795
+BK02,Bouwkosten Systeem met horizontaal geboord filter,,,5,9,5,,,,,,,,,,,1086340.38975
+VK021,Ruimtebeslag,,,,,,,6000,m²,0,,,1000.0,,6.0,,0
+VK022,0,,,,,,,0,0,0,,,,,,,0
+VK023,Grondaankopen niet meegenomen,,,,,,,0,PM,0,,,,,,,0
+VK024,Zakelijk recht niet meegenomen,,,,,,,0,PM,0,,,,,,,0
+VK025,Schaderegelingen niet meegenomen,,,,,,,0,PM,0,,,,,,,0
+VK026,Post,,,,,,,0,ehd,0,,,,,,,0
+VK027,Nader te detailleren vastgoedkosten,,,,,,,0,,0,,,,,,,0
+VK028,Notariskosten,,,,,,,0,PM,0,,,,,,,0
+VK029,Makelaarskosten,,,,,,,0,PM,0,,,,,,,0
+VK0210,Eenmalige kosten,,,,,,,0,PM,0,,,,,,,0
+VK0211,Overdrachtsbelasting,,,,,,,0,,0,,,,,,,0
+VK0212,Procentuele post,,,,,,,0,,0,,,,,,,0
+VK0213,Procentuele post,,,,,,,0,,0,,,,,,,0
+VZVK,Voorziene vastgoedkosten ,,,,,,,,,,,,,,,,0
+VK0215,Benoemd objectrisico vastgoedkosten,,,,,,,0,k*g,0,,,,,,,0
+VK0216,Benoemd objectrisico vastgoedkosten,,,,,,,0,k*g,0,,,,,,,0
+VK0217,Niet benoemd objectrisico vastgoedkosten,,,,,,,0.25,,0,,,,,,,0
+RVK,Risico's vastgoedkosten,,,,,,,,,,,,,,,,0
+VK02,Vastgoedkosten Systeem met horizontaal geboord filter,,,,,,,,,,,,,,,,0
+EK021,Engineeringskosten aannemer(s),,,,,,,0,,869072.3118,,,,,,,0
+EK022,Engineeringskosten adviesbureau(s),,,,,,,0.1,,869072.3118,,,,,,,86907.23118
+EK023,Engineeringskosten opdrachtgever (overheid/instantie/bedrijf),,,,,,,0.05,,869072.3118,,,,,,,43453.61559
+EK024,Directievoering en toezicht / systeemgerichte contractbeheersing,,,,,,,0,,869072.3118,,,,,,,0
+EK025,Post,,,,,,,0,ehd,0,,,,,,,0
+EK026,Post,,,,,,,0,ehd,0,,,,,,,0
+EK027,Post,,,,,,,0,ehd,0,,,,,,,0
+EK028,Nader te detailleren engineeringskosten,,,,,,,0,,130360.84677,,,,,,,0
+EK029,Post,,,,,,,0,EUR,0,,,,,,,0
+EK0210,Post,,,,,,,0,EUR,0,,,,,,,0
+EK0211,Post,,,,,,,0,EUR,0,,,,,,,0
+EK0212,Procentuele post,,,,,,,0,,130360.84677,,,,,,,0
+EK0213,Procentuele post,,,,,,,0,,130360.84677,,,,,,,0
+EK0214,Procentuele post,,,,,,,0,,130360.84677,,,,,,,0
+VZEK,Voorziene engineeringskosten ,,,,,,,,,,,,,,,,130360.84677
+EK0216,Benoemd objectrisico engineeringskosten,,,,,,,0,k*g,0,,,,,,,0
+EK0217,Benoemd objectrisico engineeringskosten,,,,,,,0,k*g,0,,,,,,,0
+EK0218,Niet benoemd objectrisico engineeringskosten,,,,,,,0.25,,130360.84677,,,,,,,32590.2116925
+REK,Risico's engineeringskosten,,,,,,,,,,,,,,,,32590.2116925
+EK02,Engineeringskosten Systeem met horizontaal geboord filter,,,,,,,0.18749999999999997,,,,,,,,,162951.0584625
+OK021,Overige bijkomende kosten,,,,,,,0.05,,869072.3118,,,,,,,43453.61559
+OK022,Verzekeringen,,,,,,,0,,869072.3118,,,,,,,0
+OK023,Kabels en leidingen,,,,,,,0,,869072.3118,,,,,,,0
+OK024,Post,,,,,,,0,ehd,0,,,,,,,0
+OK025,Post,,,,,,,0,ehd,0,,,,,,,0
+OK026,Post,,,,,,,0,ehd,0,,,,,,,0
+OK027,Nader te detailleren overige bijkomende kosten,,,,,,,0,,43453.61559,,,,,,,0
+OK028,Post,,,,,,,0,EUR,0,,,,,,,0
+OK029,Post,,,,,,,0,EUR,0,,,,,,,0
+OK0210,Post,,,,,,,0,EUR,0,,,,,,,0
+OK0211,Procentuele post,,,,,,,0,,43453.61559,,,,,,,0
+OK0212,Procentuele post,,,,,,,0,,43453.61559,,,,,,,0
+OK0213,Procentuele post,,,,,,,0,,43453.61559,,,,,,,0
+VZOBK,Voorziene overige bijkomende kosten ,,,,,,,,,,,,,,,,43453.61559
+OK0215,Benoemd objectrisico overige bijkomende kosten,,,,,,,0,k*g,0,,,,,,,0
+OK0216,Benoemd objectrisico overige bijkomende kosten,,,,,,,0,k*g,0,,,,,,,0
+OK0237,Niet benoemd objectrisico overige bijkomende kosten,,,,,,,0.25,,43453.61559,,,,,,,10863.4038975
+ROBK,Risico's overige bijkomende kosten,,,,,,,,,,,,,,,,10863.4038975
+OBK02,Overige bijkomende kosten Systeem met horizontaal geboord filter,,,,,,,0.0625,,,,,,,,,54317.0194875
+INV02,Totaal investeringskosten Systeem met horizontaal geboord filter,,,5,9,5,,,,,,,,,,,1303608.4677000002
+INV02,Totaal investeringskosten (NCW) Systeem met horizontaal geboord filter,,,,,,,,,,,,,,,,1245074.9690937283
