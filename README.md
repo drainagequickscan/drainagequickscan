@@ -84,4 +84,4 @@ The code is based on the tool that is available on [www.drainagequickscan.nl](ht
 
 <img height=100 src="https://github.com/drainagequickscan/drainagequickscan/blob/master/examples/figures/witteveenbos.jpg" alt="WB Logo">
 
-<img height=100 src="https://github.com/drainagequickscan/drainagequickscan/blob/master/examples/figures/povpiping.png" alt="POVPiping Logo>
+<img height=100 src="https://github.com/drainagequickscan/drainagequickscan/blob/master/examples/figures/povpiping.png" alt="POVPiping Logo">
