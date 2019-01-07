@@ -2,7 +2,7 @@
 _Using TimML for geohydrological modelling of dike cross-sections_
 
 ## Introduction
-drainagequickscan contains python code for creating cross-sectional geohydrological models for river dikes. The models are built using [TimML](https://github.com/mbakker7/timml). The python code is based on the code behind the [Quickscan Drainagetechnieken website](#www.drainagequickscan.nl).
+drainagequickscan contains python code for creating cross-sectional geohydrological models for river dikes. The models are built using [TimML](https://github.com/mbakker7/timml). The python code is based on the code behind the [Quickscan Drainagetechnieken website](http://www.drainagequickscan.nl).
 
 ## Description
 The tool is essentially a wrapper around [TimML](https://github.com/mbakker7/timml). This module makes certain assumptions about model structure which are used to create a TimML model. It includes a bunch of useful functions for creating and visualizing cross-sectional models.
