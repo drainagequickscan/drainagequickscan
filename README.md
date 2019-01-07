@@ -1,6 +1,12 @@
 # drainagequickscan
 _Using TimML for geohydrological modelling of dike cross-sections_
 
+## Contributors
+- Davíd Brakenhoff (author of the Python code)
+- Hendrik Meuwese (project inception, project management)
+- Ilja de Jong (cost calculations) 
+- Mark Bakker (for additions to TimML)
+
 ## Introduction
 drainagequickscan contains python code for creating cross-sectional geohydrological models for river dikes. The models are built using [TimML](https://github.com/mbakker7/timml). The python code is based on the code behind the [Quickscan Drainagetechnieken website](http://www.drainagequickscan.nl).
 
@@ -82,5 +88,4 @@ The following images show examples of the output.
 ## Background
 The code is based on the tool that is available on [www.drainagequickscan.nl](http://www.drainagequickscan.nl). This tool was developed by Witteveen+Bos and commissioned by the POV-Piping. 
 
-<img height=100 src="https://github.com/drainagequickscan/drainagequickscan/blob/master/examples/figures/witteveenbos.jpg" alt="WB Logo">
-<img height=100 src="https://github.com/drainagequickscan/drainagequickscan/blob/master/examples/figures/povpiping.png" alt="POVPiping Logo">
+<img height=100 src="https://github.com/drainagequickscan/drainagequickscan/blob/master/examples/figures/witteveenbos.jpg" alt="WB Logo"> <img height=100 src="https://github.com/drainagequickscan/drainagequickscan/blob/master/examples/figures/povpiping.png" alt="POVPiping Logo">
