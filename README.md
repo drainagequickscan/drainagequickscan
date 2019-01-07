@@ -83,5 +83,4 @@ The following images show examples of the output.
 The code is based on the tool that is available on [www.drainagequickscan.nl](http://www.drainagequickscan.nl). This tool was developed by Witteveen+Bos and commissioned by the POV-Piping. 
 
 <img height=100 src="https://github.com/drainagequickscan/drainagequickscan/blob/master/examples/figures/witteveenbos.jpg" alt="WB Logo">
-
 <img height=100 src="https://github.com/drainagequickscan/drainagequickscan/blob/master/examples/figures/povpiping.png" alt="POVPiping Logo">
