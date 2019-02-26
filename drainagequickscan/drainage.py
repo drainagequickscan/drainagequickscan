@@ -361,14 +361,11 @@ class VerticalWellsXsec:
             inhomright = inhomlist[i + 1]
             for j in range(len(ypts) - 1):
                 lsh = IntHeadDiffLineSink(ml, x1=inhomleft.x2, y1=ypts[j], x2=inhomleft.x2, y2=ypts[j + 1], order=order,
-                                          ndeg=ndeg,
-                                          addtomodel=True, aq=inhomright, aqin=inhomright, aqout=inhomleft)
+                                          ndeg=ndeg, addtomodel=True, aq=inhomright, aqin=inhomright, aqout=inhomleft)
                 lsh.inhomelement = False
 
-                lsq = IntFluxDiffLineSink(ml, x1=inhomright.x1, y1=ypts[j], x2=inhomright.x1, y2=ypts[j + 1],
-                                          order=order,
-                                          ndeg=ndeg,
-                                          addtomodel=True, aq=inhomleft, aqin=inhomleft, aqout=inhomright)
+                lsq = IntFluxDiffLineSink(ml, x1=inhomright.x1, y1=ypts[j], x2=inhomright.x1, y2=ypts[j + 1], order=order,
+                                          ndeg=ndeg, addtomodel=True, aq=inhomleft, aqin=inhomleft, aqout=inhomright)
                 lsq.inhomelement = False
                 lslist += [lsh, lsq]
 
