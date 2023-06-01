@@ -24,15 +24,14 @@ class GeometryError(Exception):
 
 
 class XsecDikeModel:
-    """Wrapper around TimML cross-sectional model
+    """Wrapper around TimML cross-sectional model"""
 
-    """
     _xdict = {
         "breedte_voorland": np.nan,
         "breedte_dijk_totaal": np.nan,
         "breedte_dijk_kruin": np.nan,
         "breedte_dijk_berm": np.nan,
-        "breedte_kwelsloot": np.nan
+        "breedte_kwelsloot": np.nan,
     }
 
     _zdict = {
@@ -44,7 +43,7 @@ class XsecDikeModel:
         "z_deklaag_onder": np.nan,
         "z_sdl_boven": np.nan,
         "z_sdl_onder": np.nan,
-        "z_wvp_onder": np.nan
+        "z_wvp_onder": np.nan,
     }
 
     _kdict = {
@@ -52,21 +51,16 @@ class XsecDikeModel:
         "kv_deklaag_voorland": np.nan,
         "kv_deklaag_achterland": np.nan,
         "kv_sdl": np.nan,
-        "kh_wvp": np.nan
+        "kh_wvp": np.nan,
     }
 
-    _wdict = {
-        "hriv": np.nan,
-        "hpolder": np.nan,
-        "criv": 1.0
-    }
+    _wdict = {"hriv": np.nan, "hpolder": np.nan, "criv": 1.0}
 
     def __init__(self, xdict, zdict, kdict, wdict):
-
         self.logger = self.get_logger()
 
         # PARAMETERS
-        self.init_time = pd.datetime.now()
+        self.init_time = pd.Timestamp.now()
         self.logger.info("Time start: " + self.init_time.strftime("%Y-%m-%d %H:%M:%S"))
         self.logger.info("-" * 15 + " SETTING UP MODEL " + "-" * 15)
         self.logger.info("Checking input parameters...")
@@ -77,19 +71,23 @@ class XsecDikeModel:
         self.wdict = wdict
 
         # test for completeness and add to object as attributes
-        for idict, check_dict in zip([xdict, zdict, kdict, wdict],
-                                     [self._xdict, self._zdict, self._kdict, self._wdict]):
+        for idict, check_dict in zip(
+            [xdict, zdict, kdict, wdict],
+            [self._xdict, self._zdict, self._kdict, self._wdict],
+        ):
             s_in = set(idict.keys())
             s_expected = set(check_dict.keys())
             for key in s_expected - s_in:
-                self.logger.error("Data Missing Error: {} is missing from input!".format(key))
+                self.logger.error(
+                    "Data Missing Error: {} is missing from input!".format(key)
+                )
 
             for k, v in idict.items():
                 if k in check_dict.keys():
                     setattr(self, k, v)
 
         # parameter used to divide aquifer into sub-layers
-        self.L_filter = 5.
+        self.L_filter = 5.0
 
         # get coordinates of surface level
         self.xpts_mv, self.zpts_mv = self.get_xz_arrays()
@@ -115,7 +113,6 @@ class XsecDikeModel:
 
     @classmethod
     def fromparamfile(cls, fparam):
-
         xdict = {}
         zdict = {}
         kdict = {}
@@ -137,7 +134,6 @@ class XsecDikeModel:
         return cls(xdict, zdict, kdict, wdict)
 
     def write_paramfile(self, output=None):
-
         if output is None:
             output = "./parameters.txt"
         with open(output, "w") as f:
@@ -148,14 +144,17 @@ class XsecDikeModel:
 
     def solve(self, **kwargs):
         self.model.solve(**kwargs)
-        self.logger.info("Model solved. Time elapsed: {0:.1f} seconds".format((pd.datetime.now() -
-                                                                               self.init_time).total_seconds()))
+        self.logger.info(
+            "Model solved. Time elapsed: {0:.1f} seconds".format(
+                (pd.Timestamp.now() - self.init_time).total_seconds()
+            )
+        )
 
     def get_logger(self, log_level=logging.INFO, filename="info.log"):
-
-        logging.basicConfig(format='%(asctime)s | %(levelname)s : %(message)s',
-                            level=logging.INFO)
-        fhandler = logging.FileHandler(filename=filename, mode='w')
+        logging.basicConfig(
+            format="%(asctime)s | %(levelname)s : %(message)s", level=logging.INFO
+        )
+        fhandler = logging.FileHandler(filename=filename, mode="w")
         # fhandler.setFormatter('%(asctime)s | %(levelname)s : %(message)s')
         logger = logging.getLogger()
         logger.addHandler(fhandler)
@@ -164,45 +163,78 @@ class XsecDikeModel:
         return logger
 
     def initialize(self):
-
         # Afgeleide parameters
         if np.isnan(self.kv_sdl):
             self.sdl = False
             self.c_sdl = None
         else:
             self.sdl = True
-            self.c_sdl = (float(self.z_sdl_boven) - float(self.z_sdl_onder)) / float(self.kv_sdl)
+            self.c_sdl = (float(self.z_sdl_boven) - float(self.z_sdl_onder)) / float(
+                self.kv_sdl
+            )
 
         # Create layers
         dzl1 = 1.0  # m, min thickness layer
 
         if self.sdl:  # 2 watervoerende lagen
-            self.logger.info(("Main aquifer contains aquitard between " +
-                              "{0:+.1f} and {1:+.1f} mNAP!".format(self.z_sdl_boven, self.z_sdl_onder) +
-                              " Resistance c = {0:.2f} days.".format(self.c_sdl)))
+            self.logger.info(
+                (
+                    "Main aquifer contains aquitard between "
+                    + "{0:+.1f} and {1:+.1f} mNAP!".format(
+                        self.z_sdl_boven, self.z_sdl_onder
+                    )
+                    + " Resistance c = {0:.2f} days.".format(self.c_sdl)
+                )
+            )
             if self.z_deklaag_onder - self.L_filter == self.z_sdl_boven:
-                zdis_tzl = np.arange(self.z_deklaag_onder, self.z_deklaag_onder -
-                                     (self.L_filter + dzl1), -dzl1)
+                zdis_tzl = np.arange(
+                    self.z_deklaag_onder,
+                    self.z_deklaag_onder - (self.L_filter + dzl1),
+                    -dzl1,
+                )
                 self.logger.info(
-                    "Vertical filters reach top of aquitard. " +
-                    "Subdivide aquifer into {0} 1-meter layers.".format(len(zdis_tzl) - 1))
+                    "Vertical filters reach top of aquitard. "
+                    + "Subdivide aquifer into {0} 1-meter layers.".format(
+                        len(zdis_tzl) - 1
+                    )
+                )
             else:
-                zdis1 = np.arange(self.z_deklaag_onder, self.z_deklaag_onder -
-                                  (self.L_filter + dzl1), -dzl1)
-                self.logger.info("Top aquifer is thicker than length vertical filters. Subdivide aquifer into " +
-                                 "{0} 1-meter layers to bottom of filter.".format(len(zdis1) - 1))
-                remaining_thickness = (self.z_deklaag_onder - self.L_filter - self.z_sdl_boven)
-                if remaining_thickness <= 10.:
+                zdis1 = np.arange(
+                    self.z_deklaag_onder,
+                    self.z_deklaag_onder - (self.L_filter + dzl1),
+                    -dzl1,
+                )
+                self.logger.info(
+                    "Top aquifer is thicker than length vertical filters. Subdivide aquifer into "
+                    + "{0} 1-meter layers to bottom of filter.".format(len(zdis1) - 1)
+                )
+                remaining_thickness = (
+                    self.z_deklaag_onder - self.L_filter - self.z_sdl_boven
+                )
+                if remaining_thickness <= 10.0:
                     nlays = int(np.ceil(remaining_thickness / dzl1))
-                    zdis2 = np.linspace(self.z_deklaag_onder - (self.L_filter + dzl1),
-                                        self.z_sdl_boven, nlays)
-                    self.logger.info("Thickness top aquifer beneath vertical filter is <= 10 m. " +
-                                     "Subdivide into {0} layers.".format(len(zdis2) - 1))
-                elif remaining_thickness > 10.:
+                    zdis2 = np.linspace(
+                        self.z_deklaag_onder - (self.L_filter + dzl1),
+                        self.z_sdl_boven,
+                        nlays,
+                    )
+                    self.logger.info(
+                        "Thickness top aquifer beneath vertical filter is <= 10 m. "
+                        + "Subdivide into {0} layers.".format(len(zdis2) - 1)
+                    )
+                elif remaining_thickness > 10.0:
                     nlays = 4  # divide remaining thickness up in this many layers
-                    self.logger.info("Thickness top aquifer beneath filter is > 10 m. " +
-                                     "Subdivide into {0} layers with linearly increasing thickness.".format(nlays))
-                    dzlj = remaining_thickness / np.sum(np.arange(1, nlays + 1)) * np.arange(1, nlays + 1)
+                    self.logger.info(
+                        "Thickness top aquifer beneath filter is > 10 m. "
+                        + "Subdivide into {0} layers with linearly increasing thickness.".format(
+                            nlays
+                        )
+                    )
+                    dzlj = (
+                        remaining_thickness
+                        / np.sum(np.arange(1, nlays + 1))
+                        * np.arange(1, nlays + 1)
+                    )
                     zdis2 = self.z_deklaag_onder - (self.L_filter) * np.ones(nlays)
                     zdis2 -= np.cumsum(dzlj)
                 zdis_tzl = np.concatenate([zdis1, zdis2])
@@ -222,28 +254,54 @@ class XsecDikeModel:
             c = [self.c_sdl]
         else:  # 1 watervoerende laag
             if self.z_deklaag_onder - self.L_filter == self.z_wvp_onder:
-                zdis = np.arange(self.z_deklaag_onder, self.z_deklaag_onder -
-                                 (self.L_filter + dzl1), -dzl1)
-                self.logger.info("Vertical filters reach bottom of aquifer. " +
-                                 "Subdivide aquifer into {0} 1-meter layers.".format(len(zdis)))
+                zdis = np.arange(
+                    self.z_deklaag_onder,
+                    self.z_deklaag_onder - (self.L_filter + dzl1),
+                    -dzl1,
+                )
+                self.logger.info(
+                    "Vertical filters reach bottom of aquifer. "
+                    + "Subdivide aquifer into {0} 1-meter layers.".format(len(zdis))
+                )
             else:
-                zdis1 = np.arange(self.z_deklaag_onder, self.z_deklaag_onder -
-                                  (self.L_filter + dzl1), -dzl1)
-                self.logger.info("Aquifer is thicker than length vertical filter. " +
-                                 "Subdivide aquifer into {0} 1-meter layers to bottom vertical filter.".format(
-                                     len(zdis1)))
-                remaining_thickness = (self.z_deklaag_onder - self.L_filter - self.z_wvp_onder)
-                if remaining_thickness <= 10.:
+                zdis1 = np.arange(
+                    self.z_deklaag_onder,
+                    self.z_deklaag_onder - (self.L_filter + dzl1),
+                    -dzl1,
+                )
+                self.logger.info(
+                    "Aquifer is thicker than length vertical filter. "
+                    + "Subdivide aquifer into {0} 1-meter layers to bottom vertical filter.".format(
+                        len(zdis1)
+                    )
+                )
+                remaining_thickness = (
+                    self.z_deklaag_onder - self.L_filter - self.z_wvp_onder
+                )
+                if remaining_thickness <= 10.0:
                     nlays = int(np.ceil(remaining_thickness / dzl1))
-                    zdis2 = np.linspace(self.z_deklaag_onder - (self.L_filter + dzl1),
-                                        self.z_wvp_onder, nlays)
-                    self.logger.info("Thickness aquifer beneath vertical filter is <= 10 m. " +
-                                     "Subdivide into {0} layers.".format(len(zdis2) - 1))
-                elif remaining_thickness > 10.:
+                    zdis2 = np.linspace(
+                        self.z_deklaag_onder - (self.L_filter + dzl1),
+                        self.z_wvp_onder,
+                        nlays,
+                    )
+                    self.logger.info(
+                        "Thickness aquifer beneath vertical filter is <= 10 m. "
+                        + "Subdivide into {0} layers.".format(len(zdis2) - 1)
+                    )
+                elif remaining_thickness > 10.0:
                     nlays = 4  # divide remaining thickness up in this many layers
-                    self.logger.info("Thickness aquifer beneath filter is > 10 m. " +
-                                     "Subdivide into {0} layers with linearly increasing thickness.".format(nlays))
-                    dzlj = remaining_thickness / np.sum(np.arange(1, nlays + 1)) * np.arange(1, nlays + 1)
+                    self.logger.info(
+                        "Thickness aquifer beneath filter is > 10 m. "
+                        + "Subdivide into {0} layers with linearly increasing thickness.".format(
+                            nlays
+                        )
+                    )
+                    dzlj = (
+                        remaining_thickness
+                        / np.sum(np.arange(1, nlays + 1))
+                        * np.arange(1, nlays + 1)
+                    )
                     zdis2 = self.z_deklaag_onder - self.L_filter * np.ones(nlays)
                     zdis2 -= np.cumsum(dzlj)
 
@@ -255,8 +313,12 @@ class XsecDikeModel:
             self.kv = self.anisotropie * self.kh
             c = []
 
-        self.c_deklaag = (self.z_deklaag_boven - self.z_deklaag_onder) / self.kv_deklaag_achterland
-        self.c_voorland = (self.z_voorland_boven - self.z_voorland_onder) / self.kv_deklaag_voorland
+        self.c_deklaag = (
+            self.z_deklaag_boven - self.z_deklaag_onder
+        ) / self.kv_deklaag_achterland
+        self.c_voorland = (
+            self.z_voorland_boven - self.z_voorland_onder
+        ) / self.kv_deklaag_voorland
 
         z = [(iz, jz) for iz, jz in zip(zt, zb)]
         z = np.array(z).ravel()
@@ -277,21 +339,47 @@ class XsecDikeModel:
         self.caq[Hleakylayer > 1e-14] = np.asarray(c)
 
     def build_timml_model(self):
-
-        ml = timml.ModelMaq(kaq=self.kh, z=self.z,
-                            c=np.r_[np.atleast_1d(self.c_deklaag), self.caq],
-                            npor=0.3, topboundary="semi", hstar=0.)
-        inhom_riv = timml.StripInhomMaq(ml, x1=-np.inf, x2=self.xR_riv, kaq=self.kh, z=self.zriv,
-                                        c=np.r_[np.atleast_1d(self.criv), self.caq],
-                                        npor=0.3, topboundary="semi", hstar=self.hriv)
-        inhom_voorland = timml.StripInhomMaq(ml, x1=self.xR_riv, x2=self.xR_voorland, kaq=self.kh,
-                                             z=self.zvoorland,
-                                             c=np.r_[np.atleast_1d(self.c_voorland), self.caq],
-                                             npor=0.3, topboundary="semi", hstar=self.hriv)
-        inhom_achterland = timml.StripInhomMaq(ml, x1=self.xR_voorland, x2=np.inf, kaq=self.kh,
-                                               z=self.zpolder,
-                                               c=np.r_[np.atleast_1d(self.c_deklaag), self.caq],
-                                               npor=0.3, topboundary="semi", hstar=self.hpolder)
+        ml = timml.ModelMaq(
+            kaq=self.kh,
+            z=self.z,
+            c=np.r_[np.atleast_1d(self.c_deklaag), self.caq],
+            npor=0.3,
+            topboundary="semi",
+            hstar=0.0,
+        )
+        inhom_riv = timml.StripInhomMaq(
+            ml,
+            x1=-np.inf,
+            x2=self.xR_riv,
+            kaq=self.kh,
+            z=self.zriv,
+            c=np.r_[np.atleast_1d(self.criv), self.caq],
+            npor=0.3,
+            topboundary="semi",
+            hstar=self.hriv,
+        )
+        inhom_voorland = timml.StripInhomMaq(
+            ml,
+            x1=self.xR_riv,
+            x2=self.xR_voorland,
+            kaq=self.kh,
+            z=self.zvoorland,
+            c=np.r_[np.atleast_1d(self.c_voorland), self.caq],
+            npor=0.3,
+            topboundary="semi",
+            hstar=self.hriv,
+        )
+        inhom_achterland = timml.StripInhomMaq(
+            ml,
+            x1=self.xR_voorland,
+            x2=np.inf,
+            kaq=self.kh,
+            z=self.zpolder,
+            c=np.r_[np.atleast_1d(self.c_deklaag), self.caq],
+            npor=0.3,
+            topboundary="semi",
+            hstar=self.hpolder,
+        )
 
         self.model = ml
         self.inhoms = [inhom_riv, inhom_voorland, inhom_achterland]
@@ -300,20 +388,34 @@ class XsecDikeModel:
         # Check geometry
         if self.z_deklaag_boven <= self.z_deklaag_onder:
             raise GeometryError(
-                "z_deklaag_boven ({0}) below z_deklaag_onder ({1})".format(self.z_deklaag_boven,
-                                                                           self.z_deklaag_onder))
+                "z_deklaag_boven ({0}) below z_deklaag_onder ({1})".format(
+                    self.z_deklaag_boven, self.z_deklaag_onder
+                )
+            )
 
         if self.z_voorland_boven <= self.z_voorland_onder:
             raise GeometryError(
-                "z_deklaag_boven ({0}) below z_deklaag_onder ({1})".format(self.z_deklaag_boven,
-                                                                           self.z_deklaag_onder))
+                "z_deklaag_boven ({0}) below z_deklaag_onder ({1})".format(
+                    self.z_deklaag_boven, self.z_deklaag_onder
+                )
+            )
 
         if self.sdl:
-            if not (self.z_wvp_onder < self.z_sdl_onder <
-                    self.z_sdl_boven < self.z_deklaag_onder < self.z_deklaag_boven):
+            if not (
+                self.z_wvp_onder
+                < self.z_sdl_onder
+                < self.z_sdl_boven
+                < self.z_deklaag_onder
+                < self.z_deklaag_boven
+            ):
                 raise GeometryError("layer elevations not consistent in polder.")
-            if not (self.z_wvp_onder < self.z_sdl_onder < self.z_sdl_boven <
-                    self.z_voorland_onder < self.z_voorland_boven):
+            if not (
+                self.z_wvp_onder
+                < self.z_sdl_onder
+                < self.z_sdl_boven
+                < self.z_voorland_onder
+                < self.z_voorland_boven
+            ):
                 raise GeometryError("layer elevations not consistent in 'voorland'.")
         else:
             if not self.z_wvp_onder < self.z_deklaag_onder < self.z_deklaag_boven:
@@ -323,54 +425,83 @@ class XsecDikeModel:
 
         if self.z_voorland_onder != self.z_deklaag_onder:
             self.logger.warning(
-                "Confining layer bottoms not equal: outside: {0:.1f}, inside: {1:.1f}".format(self.z_voorland_onder,
-                                                                                              self.z_deklaag_onder))
-            self.logger.warning("... Calculation is correct but output graphics show only inside value.")
+                "Confining layer bottoms not equal: outside: {0:.1f}, inside: {1:.1f}".format(
+                    self.z_voorland_onder, self.z_deklaag_onder
+                )
+            )
+            self.logger.warning(
+                "... Calculation is correct but output graphics show only inside value."
+            )
 
         if not self.z_deklaag_boven < self.z_dijk_berm < self.z_dijk_kruin:
             self.logger.warning(
                 "Elevation revetment (NAP{0:+.1f}) not between surface level (NAP{1:+.1f}) or top dike (NAP{2:+.1f})".format(
-                    self.z_dijk_berm,
-                    self.z_deklaag_boven,
-                    self.z_dijk_kruin))
+                    self.z_dijk_berm, self.z_deklaag_boven, self.z_dijk_kruin
+                )
+            )
             self.logger.warning(
-                "... Setting revetment elevation equal to surface level (NAP{0:+.1f}).".format(self.z_deklaag_boven))
+                "... Setting revetment elevation equal to surface level (NAP{0:+.1f}).".format(
+                    self.z_deklaag_boven
+                )
+            )
             self.z_dijk_berm = self.z_deklaag_boven
 
         checklevels = np.array([self.hriv, self.z_voorland_boven, self.z_deklaag_boven])
         check = self.z_dijk_kruin < checklevels
         if np.any(check):
             checkstr = ["peil_buitenwater", "z_voorland_boven", "z_deklaag_boven"]
-            self.logger.error("Elevation top dike (NAP{0:+.1f}) is lower than: {1}, {2}".format(self.z_dijk_kruin,
-                                                                                                np.array(checkstr)[
-                                                                                                    check],
-                                                                                                checklevels[check]))
-            raise GeometryError("Elevation top dike (NAP{0:+.1f}) is lower than: {1}, {2}".format(self.z_dijk_kruin,
-                                                                                                  np.array(checkstr)[
-                                                                                                      check],
-                                                                                                  checklevels[check]))
+            self.logger.error(
+                "Elevation top dike (NAP{0:+.1f}) is lower than: {1}, {2}".format(
+                    self.z_dijk_kruin, np.array(checkstr)[check], checklevels[check]
+                )
+            )
+            raise GeometryError(
+                "Elevation top dike (NAP{0:+.1f}) is lower than: {1}, {2}".format(
+                    self.z_dijk_kruin, np.array(checkstr)[check], checklevels[check]
+                )
+            )
 
         if self.breedte_voorland <= 0:
             raise GeometryError("'Voorland' cannot have length <= 0.")
 
-        if np.any(np.array([self.breedte_voorland, self.breedte_dijk_berm,
-                            self.breedte_dijk_totaal, self.breedte_kwelsloot]) < 0.):
+        if np.any(
+            np.array(
+                [
+                    self.breedte_voorland,
+                    self.breedte_dijk_berm,
+                    self.breedte_dijk_totaal,
+                    self.breedte_kwelsloot,
+                ]
+            )
+            < 0.0
+        ):
             raise GeometryError("One or more lengths is < 0.")
 
         if self.breedte_dijk_berm >= self.breedte_dijk_totaal:
             raise GeometryError("Revetment cannot be wider that width dike!")
 
         if self.hpolder <= self.z_deklaag_onder:
-            self.logger.error("Groundwater level in polder should not be below bottom confining layer!")
+            self.logger.error(
+                "Groundwater level in polder should not be below bottom confining layer!"
+            )
 
         if self.sdl:
-            kwaardes = np.array([self.kv_deklaag_voorland, self.kv_deklaag_achterland,
-                                 self.kh_wvp, self.kv_sdl])
+            kwaardes = np.array(
+                [
+                    self.kv_deklaag_voorland,
+                    self.kv_deklaag_achterland,
+                    self.kh_wvp,
+                    self.kv_sdl,
+                ]
+            )
         else:
-            kwaardes = np.array([self.kv_deklaag_voorland, self.kv_deklaag_achterland,
-                                 self.kh_wvp])
-        if np.any(kwaardes <= 0.):
-            raise ValueError("One or more hydraulic conductivities less than or equal to 0.")
+            kwaardes = np.array(
+                [self.kv_deklaag_voorland, self.kv_deklaag_achterland, self.kh_wvp]
+            )
+        if np.any(kwaardes <= 0.0):
+            raise ValueError(
+                "One or more hydraulic conductivities less than or equal to 0."
+            )
 
     def get_xz_arrays(self):
         """
@@ -379,26 +510,49 @@ class XsecDikeModel:
 
         self.x0 = self.breedte_voorland + self.breedte_dijk_totaal
 
-        totale_breedte_taluds = self.breedte_dijk_totaal - self.breedte_dijk_berm - self.breedte_dijk_kruin
+        totale_breedte_taluds = (
+            self.breedte_dijk_totaal - self.breedte_dijk_berm - self.breedte_dijk_kruin
+        )
 
         dz_voorland_kruin = self.z_dijk_kruin - self.z_voorland_boven
         dz_kruin_berm = self.z_dijk_kruin - self.z_dijk_berm
         dz_berm_achterland = self.z_dijk_berm - self.z_deklaag_boven
         dz_helling_totaal = dz_voorland_kruin + dz_kruin_berm + dz_berm_achterland
 
-        breedte_talud_buiten = dz_voorland_kruin / dz_helling_totaal * totale_breedte_taluds
-        breedte_talud_binnen_kruin = dz_kruin_berm / dz_helling_totaal * totale_breedte_taluds
-        breedte_talud_binnen_berm = dz_berm_achterland / dz_helling_totaal * totale_breedte_taluds
+        breedte_talud_buiten = (
+            dz_voorland_kruin / dz_helling_totaal * totale_breedte_taluds
+        )
+        breedte_talud_binnen_kruin = (
+            dz_kruin_berm / dz_helling_totaal * totale_breedte_taluds
+        )
+        breedte_talud_binnen_berm = (
+            dz_berm_achterland / dz_helling_totaal * totale_breedte_taluds
+        )
 
-        x = np.array([0., self.breedte_voorland, breedte_talud_buiten,
-                      self.breedte_dijk_kruin, breedte_talud_binnen_kruin,
-                      self.breedte_dijk_berm, breedte_talud_binnen_berm])
+        x = np.array(
+            [
+                0.0,
+                self.breedte_voorland,
+                breedte_talud_buiten,
+                self.breedte_dijk_kruin,
+                breedte_talud_binnen_kruin,
+                self.breedte_dijk_berm,
+                breedte_talud_binnen_berm,
+            ]
+        )
         x = np.cumsum(x) - self.x0
 
-        z = np.array([self.z_voorland_boven, self.z_voorland_boven,
-                      self.z_dijk_kruin, self.z_dijk_kruin,
-                      self.z_dijk_berm, self.z_dijk_berm,
-                      self.z_deklaag_boven])
+        z = np.array(
+            [
+                self.z_voorland_boven,
+                self.z_voorland_boven,
+                self.z_dijk_kruin,
+                self.z_dijk_kruin,
+                self.z_dijk_berm,
+                self.z_dijk_berm,
+                self.z_deklaag_boven,
+            ]
+        )
 
         return x, z
 
@@ -408,7 +562,9 @@ class XsecDikeModel:
             bounds.append(ih.x2)
         return np.array(bounds)
 
-    def calc_required_drawdown(self, h_exit, rho_deklaag=15., rho_w=10., gamma_bu=1.3, gamma_up=1.3):
+    def calc_required_drawdown(
+        self, h_exit, rho_deklaag=15.0, rho_w=10.0, gamma_bu=1.3, gamma_up=1.3
+    ):
         """Calculate required head in first aquifer to prevent heave.
 
         Parameters
@@ -425,7 +581,8 @@ class XsecDikeModel:
             safety factor for heave (the default is 1.3)
 
         """
-        max_head = (h_exit + (rho_deklaag - rho_w) * (self.z_deklaag_boven - self.z_deklaag_onder) /
-                    (rho_w * gamma_up * gamma_bu))
+        max_head = h_exit + (rho_deklaag - rho_w) * (
+            self.z_deklaag_boven - self.z_deklaag_onder
+        ) / (rho_w * gamma_up * gamma_bu)
 
         return max_head
